@@ -55,6 +55,7 @@ async def delete_channels():
                     channels = await response.json()
                     if len(channels) == 0:
                         Log.succ("all channels were deleted.")
+                        input("")
                         break
                     deletion_tasks = []
                     for channel in channels:
