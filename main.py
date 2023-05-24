@@ -1,9 +1,12 @@
 import asyncio
 import aiohttp
 from colorama import Fore, Style
+import os
+
 
 def clear():
     os.system("cls" if os.name == "nt" else "clear")
+
 
 class Log:
     @staticmethod
@@ -24,12 +27,11 @@ class Log:
 
 
 lc = (Fore.RESET + "[" + Fore.LIGHTMAGENTA_EX + ">" + Fore.RESET + "]")
-Leaved_server = 0
 
 clear()
-Log.console("If you use to often youre api-limit gets fucked.")
+Log.console("If you use too often, your API limit gets affected.")
 bot_token = input(lc + "Enter Bot Token: ")
-guild_id = input(lc + "Enter guild id: ")
+guild_id = input(lc + "Enter guild ID: ")
 
 headers = {
     'Authorization': f'Bot {bot_token}',
@@ -39,7 +41,7 @@ headers = {
 async def delete_channel(session, channel_id):
     url = f'https://discord.com/api/v9/channels/{channel_id}'
     async with session.delete(url) as response:
-        if response.status == 204:
+        if response.status == 204 or response.status == 200:
             Log.succ(f'Deleted channel {channel_id}')
         else:
             Log.err(f'Failed to delete channel {channel_id}. Status code: {response.status}')
@@ -52,7 +54,7 @@ async def delete_channels():
                 if response.status == 200:
                     channels = await response.json()
                     if len(channels) == 0:
-                        print('All channels deleted.')
+                        Log.succ("all channels were deleted.")
                         break
                     deletion_tasks = []
                     for channel in channels:
@@ -62,5 +64,6 @@ async def delete_channels():
                     print(f'Failed to fetch channels. Status code: {response.status}')
                     break
 
+    
 loop = asyncio.get_event_loop()
 loop.run_until_complete(delete_channels())
