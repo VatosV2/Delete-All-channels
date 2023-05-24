@@ -2,6 +2,8 @@ import asyncio
 import aiohttp
 from colorama import Fore, Style
 
+def clear():
+    os.system("cls" if os.name == "nt" else "clear")
 
 class Log:
     @staticmethod
@@ -24,6 +26,7 @@ class Log:
 lc = (Fore.RESET + "[" + Fore.LIGHTMAGENTA_EX + ">" + Fore.RESET + "]")
 Leaved_server = 0
 
+clear()
 Log.console("If you use to often youre api-limit gets fucked.")
 bot_token = input(lc + "Enter Bot Token: ")
 guild_id = input(lc + "Enter guild id: ")
