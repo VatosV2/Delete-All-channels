@@ -1,5 +1,6 @@
 import asyncio
-import requests                                                                                                                                                                                                                                                                                                                    
+import requests       
+import aiohttp
 from colorama import Fore, Style
 import os
 
